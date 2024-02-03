@@ -90,7 +90,7 @@ class _SIcal extends State<SI_Calc> {
                       dropdownColor: Colors.white54,
                       isExpanded: true,
                       validator: (var value) {
-                        if (value!.isEmpty) {
+                        if (value == null || value.isEmpty) {
                           return "Whoops! please select option..";
                         }
                         return null;
@@ -129,7 +129,7 @@ class _SIcal extends State<SI_Calc> {
                       keyboardType: TextInputType.number,
                       style: txtStyle,
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (value == null || value.isEmpty) {
                           return "Whoops! it's required..";
                         }
                         return null;
@@ -223,7 +223,7 @@ class _SIcal extends State<SI_Calc> {
                 padding: EdgeInsets.all(_padding),
                 child: Text(
                   dispOutput,
-                  textAlign: TextAlign.justify,
+                  textAlign: TextAlign.left,
                   style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -278,7 +278,7 @@ class _SIcal extends State<SI_Calc> {
           interest = (p * (r / 100) * t) / 12;
         }
         break;
-      case "Quarter":
+      case "Quarters":
         {
           interest = (p * (r / 100) * t) / 4;
         }
