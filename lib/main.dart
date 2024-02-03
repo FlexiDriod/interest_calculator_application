@@ -4,7 +4,7 @@ import 'TAbView.dart';
 void main(){
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: "Interest Tracker",
+    title: "Earn Smart: Interest Tracker",
     home: Tabs(),
   ),
   );
