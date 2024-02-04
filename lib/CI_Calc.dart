@@ -1,7 +1,5 @@
 // ignore_for_file: camel_case_types, file_names, non_constant_identifier_names, unused_local_variable, prefer_typing_uninitialized_variables
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class CI_Calc extends StatefulWidget {
@@ -30,9 +28,9 @@ class _CI_Calc extends State<CI_Calc> {
 
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController p1control = TextEditingController();
-  TextEditingController r1control = TextEditingController();
-  TextEditingController t1control = TextEditingController();
+  final TextEditingController p1control = TextEditingController();
+  final TextEditingController r1control = TextEditingController();
+  final TextEditingController t1control = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +154,7 @@ class _CI_Calc extends State<CI_Calc> {
                         ),
                         labelText: "Period", // Works like PLACEHOLDER
                         hintText:
-                            "e.g., 1, 2, 3 (years only)..", // Like, Alert Box
+                            "e.g., 1, 2, 3 and so on....", // Like, Alert Box
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0)),
                       ),
@@ -236,14 +234,16 @@ class _CI_Calc extends State<CI_Calc> {
               padding: EdgeInsets.all(_padding*4),
               child: Padding(
                 padding: EdgeInsets.all(_padding),
-                child: Text(
-                  dispOutput,
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                child: Expanded(
+                  child: Text(
+                    dispOutput,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-              ),
+                ),
             ),
             ),
           ],
@@ -273,57 +273,64 @@ class _CI_Calc extends State<CI_Calc> {
   }
 
   String _CalInterest() {
-    double p = double.parse(p1control.text);
-    double r = double.parse(r1control.text);
-    double t = double.parse(t1control.text);
-    dynamic ci;
-    dynamic A;
-    int CompondPeriods;
-
+    double p = double.parse(p1control.text);   //principle
+    double r = double.parse(r1control.text);  //rate
+    int t = int.parse(t1control.text);  //years
+    double ci;
+    double A;
     switch (_compoundFreqSelect) {
       case 'Annually':
-        CompondPeriods = 1;
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
+        A = p;
+        for (int i=0; i<t; i++){
+          A *= (1 + r/100);
+        }
         ci = A - p;
         break;
       case 'Semi-Annually':
-        CompondPeriods = 2;
-
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
-
+        A = p;
+        double semiAnuallyRate = r/2;
+        for (int i=0; i<t*2; i++){
+          A *= (1 + semiAnuallyRate/100);
+        }
         ci = A - p;
         break;
       case 'Quarterly':
-        CompondPeriods = 4;
-
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
-
+        A = p;
+        double quaterlyRate = r/4;
+        for (int i=0; i<t*4; i++){
+          A *= (1 + quaterlyRate/100);
+        }
         ci = A - p;
         break;
       case 'Monthly':
-        CompondPeriods = 12;
-
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
+        A = p;
+        double monthlyRate = r/12;
+        for (int i=0; i<t*12; i++){
+          A *= (1 + monthlyRate/100);
+        }
         ci = A - p;
         break;
       case 'Weekly':
-        CompondPeriods = 52;
-
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
-
+        A = p;
+        double weeklyRate = r/52;
+        for (int i=0; i<t*52; i++){
+          A *= (1 + weeklyRate/100);
+        }
         ci = A - p;
         break;
       case 'Daily':
-        CompondPeriods = 365;
-        A = p * ((pow((1 + r / (100 * CompondPeriods)), (t * CompondPeriods))));
-
+        A = p;
+        double dailyRate = r/365;
+        for (int i=0; i<t*365; i++){
+          A *= (1 + dailyRate/100);
+        }
         ci = A - p;
         break;
       default:
         throw Exception('Invalid compounding frequency');
     }
 
-    String output = "Interest Earned: ${ci.toStringAsFixed(3)}\n\nPayable Amount: ${A.toStringAsFixed(3)}\n";
+    String output = "Interest Earned: ${ci.toStringAsFixed(2)}\nPayable Amount: ${A.toStringAsFixed(2)}";
     return output;
   }
 
