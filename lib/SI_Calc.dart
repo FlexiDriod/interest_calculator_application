@@ -18,9 +18,9 @@ class _SIcal extends State<SI_Calc> {
 
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController pController = TextEditingController();
-  TextEditingController rController = TextEditingController();
-  TextEditingController tController = TextEditingController();
+  final TextEditingController pController = TextEditingController();
+  final TextEditingController rController = TextEditingController();
+  final TextEditingController tController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _SIcal extends State<SI_Calc> {
         padding: EdgeInsets.all(_padding * 2),
         child: ListView(
           children: <Widget>[
-            getLogo(),    //image
+            getLogo(), //image
             Padding(
               padding: EdgeInsets.only(top: _padding, bottom: _padding),
               child: TextFormField(
@@ -223,10 +223,10 @@ class _SIcal extends State<SI_Calc> {
                 padding: EdgeInsets.all(_padding),
                 child: Text(
                   dispOutput,
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
@@ -295,7 +295,7 @@ class _SIcal extends State<SI_Calc> {
     }
     var totalPayAmount = p + interest;
     dynamic output =
-        "Interest Earned: $interest\nPayable Amount: $totalPayAmount\n";
+        "Interest Earned: ${interest.toStringAsFixed(2)}\nPayable Amount: ${totalPayAmount.toStringAsFixed(2)}\n";
     return output;
   }
 

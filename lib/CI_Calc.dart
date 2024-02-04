@@ -240,7 +240,7 @@ class _CI_Calc extends State<CI_Calc> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
