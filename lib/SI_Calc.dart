@@ -31,7 +31,7 @@ class _SIcal extends State<SI_Calc> {
         padding: EdgeInsets.all(_padding * 2),
         child: ListView(
           children: <Widget>[
-            getLogo(),
+            getLogo(),    //image
             Padding(
               padding: EdgeInsets.only(top: _padding, bottom: _padding),
               child: TextFormField(
